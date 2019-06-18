@@ -1,15 +1,21 @@
-package br.ufjf.luidgisarto.trb2.Models;
+package br.ufjf.luidgisarto.trb2.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
 public class Avaliador {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "O campo é obrigatório")
     private String nome;
+
+    @NotBlank(message = "O campo é obrigatório")
     private String email;
+
+    @NotBlank(message = "O campo é obrigatório")
     private String codigo;
 
     @OneToMany(fetch = FetchType.LAZY)

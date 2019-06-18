@@ -1,4 +1,4 @@
-package br.ufjf.luidgisarto.trb2.Models;
+package br.ufjf.luidgisarto.trb2.models;
 
 import javax.persistence.*;
 

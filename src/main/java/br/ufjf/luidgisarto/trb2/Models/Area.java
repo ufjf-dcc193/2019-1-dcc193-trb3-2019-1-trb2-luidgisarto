@@ -1,4 +1,4 @@
-package br.ufjf.luidgisarto.trb2.Models;
+package br.ufjf.luidgisarto.trb2.models;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,6 +15,14 @@ public class Area {
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Avaliador> avaliadores;
+
+    public Area() {
+
+    }
+
+    public Area(String descricao) {
+        this.descricao = descricao;
+    }
 
     public Long getId() {
         return id;

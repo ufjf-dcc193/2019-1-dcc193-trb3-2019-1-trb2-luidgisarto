@@ -1,14 +1,18 @@
-package br.ufjf.luidgisarto.trb2.Models;
+package br.ufjf.luidgisarto.trb2.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Trabalho {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @NotBlank(message = "O campo é obrigatório")
     private String titulo;
+    @NotBlank(message = "O campo é obrigatório")
     private String descricao;
+    @NotBlank(message = "O campo é obrigatório")
     private String url;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
