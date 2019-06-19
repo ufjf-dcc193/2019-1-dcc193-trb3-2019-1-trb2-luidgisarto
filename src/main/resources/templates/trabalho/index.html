@@ -42,15 +42,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="trabalho: ${trabalhos}" th:object=${trabalho}>
-                    <td th:text=*{id}></td>
-                    <td th:text=*{titulo}></td>
-                    <td th:text=*{descricao}></td>
-                    <td th:text=*{url}></td>
-                    <td th:text=*{area}></td>
+                <tr th:each="trabalho: ${trabalhos}" th:object="${trabalho}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{titulo}"></td>
+                    <td th:text="*{descricao}"></td>
+                    <td th:text="*{url}"></td>
+                    <td th:text="*{area}"></td>
                     <td>
-                        <a href="/editar-sede/${sede.id}.html" class="btn-floating btn-small orange"><i class="material-icons left">edit</i></a>
-                        <a href="/excluir-sede/${sede.id}.html" class="btn-floating btn-small red"><i class="material-icons left">delete</i></a>
+                        <a th:href="@{./editar/{id}(id=*{id})}" class="btn-floating btn-small orange"><i class="material-icons left">edit</i></a>
+                        <a th:href="@{./excluir/{id}(id=*{id})}" class="btn-floating btn-small red"><i class="material-icons left">delete</i></a>
+                        <a th:href="@{./revisar/{id}(id=*{id})}" class="btn-floating btn-small green"><i class="material-icons left">check_circle</i></a>
                     </td>
                 </tr>
 

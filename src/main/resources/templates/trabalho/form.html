@@ -28,7 +28,8 @@
     </div>
 </nav>
 <div class="container">
-    <form th:action="@{salvar}" th:object="${trabalho}" method="POST">
+    <form th:action="@{/trabalhos/salvar}" th:object="${trabalho}" th:method="POST">
+        <input type="hidden" name="id" th:field="*{id}"/>
         <div class="card" style="margin-top:5em;">
             <div class="card-content">
                 <span class="card-title">Manter Trabalho</span>
@@ -57,11 +58,12 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s4">
-                        <select name="area">
-                            <option>Selecione</option>
-                            <option th:each="area : ${areas}"
-                                    th:value="${area.id}"
-                                    th:text="${area.descricao}"></option>
+                        <select name="area" th:field="*{area}">
+                            <option th:value=null th:field="*{area}">Selecione</option>
+                            <option th:each="opcao : ${opcoes}"
+                                    th:field="*{area}"
+                                    th:value="${opcao.id}"
+                                    th:text="${opcao.descricao}"></option>
                         </select>
                         <label>Áreas de Atuação</label>
                         <span class="helper-text" data-error="wrong" data-success="right"
@@ -70,9 +72,8 @@
                 </div>
             </div>
             <div class="card-action">
-                <input type="hidden" name="id" value="${sede.id}">
                 <button type="submit" class="waves-effect waves-light btn green">Salvar</button>
-                <a href="/avaliadores" class="waves-effect waves-light btn grey">Cancelar</a>
+                <a th:href="@{/trabalhos/}" class="waves-effect waves-light btn grey">Cancelar</a>
             </div>
         </div>
 </div>
