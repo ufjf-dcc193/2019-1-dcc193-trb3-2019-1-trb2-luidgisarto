@@ -58,7 +58,7 @@ public class AvaliadorController {
     }
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editarAvaliador(@PathVariable Long id) {
+    public ModelAndView editarAvaliador(@PathVariable Integer id) {
         ModelAndView mv = new ModelAndView();
 
         Avaliador avaliador = avaliadorRepository.getOne(id);
@@ -74,7 +74,7 @@ public class AvaliadorController {
     }
 
     @GetMapping("/excluir/{id}")
-    public RedirectView excluirTrabalho(@PathVariable Long id) {
+    public RedirectView excluirTrabalho(@PathVariable Integer id) {
         Avaliador avaliador = avaliadorRepository.getOne(id);
         avaliadorRepository.delete(avaliador);
         return new RedirectView("/avaliadores/");

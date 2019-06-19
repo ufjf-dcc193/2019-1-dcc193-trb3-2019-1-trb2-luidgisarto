@@ -4,11 +4,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "area")
 public class Area {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "area_id")
-    private Long id;
+    private Integer id;
     private String descricao;
 
     @ManyToMany(mappedBy = "areas")
@@ -25,11 +26,11 @@ public class Area {
         this.descricao = descricao;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

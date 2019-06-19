@@ -1,5 +1,7 @@
 package br.ufjf.luidgisarto.trb2.controllers;
 
+import br.ufjf.luidgisarto.trb2.dtos.TrabalhoAreaDto;
+import br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao;
 import br.ufjf.luidgisarto.trb2.models.Area;
 import br.ufjf.luidgisarto.trb2.models.Trabalho;
 import br.ufjf.luidgisarto.trb2.repositories.AreaRepository;
@@ -51,17 +53,18 @@ public class AreaController {
     }
 
     @GetMapping("/detalhar/{id}")
-    public ModelAndView buscarTrabalhosPorArea(@PathVariable Long id) {
+    public ModelAndView buscarTrabalhosPorArea(@PathVariable Integer id) {
         ModelAndView mv = new ModelAndView();
 
         Area area = areaRepository.getOne(id);
 
-        List<Trabalho> trabalhos = trabalhoRepository.findByAreaOrderByIdAsc(area);
+        List<TrabalhoAreaDto> trabalhosArea = trabalhoRepository
+                .obterTrabalhosPorArea(area, SituacaoRevisao.Avaliado.getId());
 
         mv.setViewName("area/trabalho-area");
 
         mv.addObject("area", area);
-        mv.addObject("trabalhos", trabalhos);
+        mv.addObject("trabalhos", trabalhosArea);
 
         return mv;
     }

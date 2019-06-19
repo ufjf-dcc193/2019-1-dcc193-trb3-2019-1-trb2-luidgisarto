@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
+@Table(name = "trabalho")
 public class Trabalho {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,6 +28,10 @@ public class Trabalho {
 
     @OneToMany(mappedBy = "trabalho")
     private List<Revisao> revisoes;
+
+    public Trabalho() {
+
+    }
 
     public Long getId() {
         return id;
@@ -66,5 +71,13 @@ public class Trabalho {
 
     public void setArea(Area area) {
         this.area = area;
+    }
+
+    public List<Revisao> getRevisoes() {
+        return revisoes;
+    }
+
+    public void setRevisoes(List<Revisao> revisoes) {
+        this.revisoes = revisoes;
     }
 }

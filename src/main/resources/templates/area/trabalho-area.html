@@ -38,12 +38,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="trabalho: ${trabalhos}" th:object="${trabalho}">
+                <tr th:each="trabalhoArea: ${trabalhos}" th:object="${trabalhoArea}">
                     <td th:text="*{id}"></td>
                     <td th:text="*{titulo}"></td>
                     <td th:text="*{descricao}"></td>
                     <td th:text="*{url}"></td>
-                    <td th:text="*{url}"></td>
+                    <td th:text="*{totalAvaliados}"></td>
                 </tr>
 
                 </tbody>

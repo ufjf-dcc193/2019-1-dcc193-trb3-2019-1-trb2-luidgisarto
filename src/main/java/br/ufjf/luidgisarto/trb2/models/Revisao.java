@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 import br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao;
 
 @Entity
+@Table(name = "revisao")
 public class Revisao {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +26,11 @@ public class Revisao {
 
     @Enumerated
     private SituacaoRevisao situacao;
+
+    public Revisao() {
+        avaliador = new Avaliador();
+        trabalho = new Trabalho();
+    }
 
     public Long getId() {
         return id;

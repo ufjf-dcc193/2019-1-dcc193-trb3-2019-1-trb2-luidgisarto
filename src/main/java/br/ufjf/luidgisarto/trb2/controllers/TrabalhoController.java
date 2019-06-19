@@ -58,7 +58,7 @@ public class TrabalhoController {
     }
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editarTrabalho(@PathVariable Long id) {
+    public ModelAndView editarTrabalho(@PathVariable Integer id) {
         ModelAndView mv = new ModelAndView();
 
         Trabalho trabalho = trabalhoRepository.getOne(id);
@@ -74,7 +74,7 @@ public class TrabalhoController {
     }
 
     @GetMapping("/revisar/{id}")
-    public ModelAndView revisarTrabalho(@PathVariable Long id) {
+    public ModelAndView revisarTrabalho(@PathVariable Integer id) {
         ModelAndView mv = new ModelAndView();
 
         Trabalho trabalho = trabalhoRepository.getOne(id);
@@ -93,7 +93,7 @@ public class TrabalhoController {
     }
 
     @GetMapping("/excluir/{id}")
-    public RedirectView excluirTrabalho(@PathVariable Long id) {
+    public RedirectView excluirTrabalho(@PathVariable Integer id) {
         Trabalho trabalho = trabalhoRepository.getOne(id);
         trabalhoRepository.delete(trabalho);
         return new RedirectView("/trabalhos/");

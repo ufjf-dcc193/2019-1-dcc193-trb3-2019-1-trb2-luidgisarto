@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manter Trabalho</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        .helper-text{
+            font-weight: bold;
+            color: red !important;
+        }
+
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper blue darken-2">
+        <a href="/index.html" class="brand-logo center">Ocean</a>
+        <ul class="left hide-on-med-and-down">
+            <li><a href="/">Início</a></li>
+            <li><a href="/avaliadores/">Avaliadores</a></li>
+            <li class="active"><a href="/trabalhos/">Trabalhos</a></li>
+            <li><a href="/areas/">Áreas</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <form th:action="@{/trabalhos/revisar}" th:object="${revisao}" th:method="POST">
+        <input type="hidden" name="trabalhoId" th:field="*{id}"/>
+        <div class="card" style="margin-top:5em;">
+            <div class="card-content">
+                <span class="card-title">Revisão do Trabalho</span>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <select name="avaliador" th:field="*{avaliador}">
+                            <option th:value=null th:field="*{avaliador}">Selecione</option>
+                            <option th:each="opcao : ${avaliadores}"
+                                    th:field="*{avaliador}"
+                                    th:value="${opcao.id}"
+                                    th:text="${opcao.nome}"></option>
+                        </select>
+                        <label>Avaliador</label>
+                        <span class="helper-text" data-error="wrong" data-success="right"
+                              th:if="${#fields.hasErrors('avaliador')}" th:errors="*{avaliador}"></span>
+                    </div>
+                    <div class="input-field col s4">
+                        <select name="trabalho" th:field="*{trabalho}">
+                            <option th:value=null th:field="*{trabalho}">Selecione</option>
+                            <option th:each="opcao : ${trabalhos}"
+                                    th:field="*{trabalho}"
+                                    th:value="${opcao.id}"
+                                    th:text="${opcao.descricao}"></option>
+                        </select>
+                        <label>Avaliador</label>
+                        <span class="helper-text" data-error="wrong" data-success="right"
+                              th:if="${#fields.hasErrors('trabalho')}" th:errors="*{trabalho}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input id="descricao" name="descricao" type="text" class="validate"
+                               th:field="*{descricao}">
+                        <label for="descricao">Descrição</label>
+                        <span class="helper-text" data-error="wrong" data-success="right"
+                              th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="nota" name="nota" type="text" class="validate"
+                               th:field="*{descricao}">
+                        <label for="nota">Nota</label>
+                        <span class="helper-text" data-error="wrong" data-success="right"
+                              th:if="${#fields.hasErrors('nota')}" th:errors="*{nota}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">
+                <button th:field="*{situacao}" th:value="${T(br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao).Pendente}" type= "submit" class="aves-effect waves-light btn-small blue">Revisar Depois</button>
+                <button th:field="*{situacao}" th:value="${T(br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao).Avaliado}" type= "submit" class="aves-effect waves-light btn-small green">Revisar Agora</button>
+                <button th:field="*{situacao}" th:value="${T(br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao).Impedido}"type= "submit" class="aves-effect waves-light btn-small black">Pular</button>
+                <button th:href="@{/trabalhos/}" class="waves-effect waves-light btn-small grey">Cancelar</button>
+            </div>
+        </div>
+</div>
+</form>
+<script>
+    $(document).ready(function() {
+        $('select').formSelect();
+    });
+</script>
+</body>
+</html>
