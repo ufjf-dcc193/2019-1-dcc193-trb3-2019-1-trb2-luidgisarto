@@ -1,10 +1,13 @@
 package br.ufjf.luidgisarto.trb2.controllers;
 
 import br.ufjf.luidgisarto.trb2.models.Area;
+import br.ufjf.luidgisarto.trb2.models.Trabalho;
 import br.ufjf.luidgisarto.trb2.repositories.AreaRepository;
+import br.ufjf.luidgisarto.trb2.repositories.TrabalhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,6 +18,9 @@ import java.util.List;
 public class AreaController {
     @Autowired
     AreaRepository areaRepository;
+
+    @Autowired
+    TrabalhoRepository trabalhoRepository;
 
     @GetMapping("/")
     public ModelAndView listarAreas() {
@@ -29,7 +35,7 @@ public class AreaController {
         return mv;
     }
 
-    @RequestMapping("/nova-area")
+    @GetMapping("/nova-area")
     public ModelAndView novoArea() {
         ModelAndView mv = new ModelAndView();
 
@@ -40,6 +46,22 @@ public class AreaController {
         mv.setViewName("form");
 
         mv.addObject("area", area);
+
+        return mv;
+    }
+
+    @GetMapping("/detalhar/{id}")
+    public ModelAndView buscarTrabalhosPorArea(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView();
+
+        Area area = areaRepository.getOne(id);
+
+        List<Trabalho> trabalhos = trabalhoRepository.findByAreaOrderByIdAsc(area);
+
+        mv.setViewName("area/trabalho-area");
+
+        mv.addObject("area", area);
+        mv.addObject("trabalhos", trabalhos);
 
         return mv;
     }

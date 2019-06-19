@@ -6,15 +6,16 @@ import java.util.List;
 @Entity
 public class Area {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "area_id")
     private Long id;
     private String descricao;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Trabalho> trabalhos;
-
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "areas")
     private List<Avaliador> avaliadores;
+
+    @OneToMany(mappedBy = "area")
+    private List<Trabalho> trabalhos;
 
     public Area() {
 
@@ -54,5 +55,10 @@ public class Area {
 
     public void setAvaliadores(List<Avaliador> avaliadores) {
         this.avaliadores = avaliadores;
+    }
+
+    @Override
+    public String toString() {
+        return this.descricao;
     }
 }

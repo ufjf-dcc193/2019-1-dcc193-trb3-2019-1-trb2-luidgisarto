@@ -2,7 +2,7 @@
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Trabalho 2  - Início</title>
+    <title>Trabalho 2  - Áreas</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -21,10 +21,8 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col s2" style="margin-top: 2em;">
-        </div>
         <div class="col s10">
-            <h3 class="text-center">Áreas</h3>
+            <h3 class="text-center">Trabalhos - <span th:text="${area}"></span></h3>
         </div>
     </div>
     <div class="row">
@@ -33,17 +31,19 @@
                 <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Titulo</th>
                     <th>Descrição</th>
-                    <th>Ações</th>
+                    <th>Url</th>
+                    <th>Total de Avaliações</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="area: ${areas}" th:object="${area}">
+                <tr th:each="trabalho: ${trabalhos}" th:object="${trabalho}">
                     <td th:text="*{id}"></td>
+                    <td th:text="*{titulo}"></td>
                     <td th:text="*{descricao}"></td>
-                    <td>
-                        <a th:href="@{./detalhar/{id}(id=*{id})}" class="btn-floating btn-small light-blue"><i class="material-icons left">remove_red_eye</i></a>
-                    </td>
+                    <td th:text="*{url}"></td>
+                    <td th:text="*{url}"></td>
                 </tr>
 
                 </tbody>
