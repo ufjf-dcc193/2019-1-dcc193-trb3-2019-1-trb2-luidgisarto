@@ -2,12 +2,14 @@ package br.ufjf.luidgisarto.trb2.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
 public class Avaliador {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "avaliador_id")
     private Long id;
     @NotBlank(message = "O campo é obrigatório")
     private String nome;
@@ -18,7 +20,13 @@ public class Avaliador {
     @NotBlank(message = "O campo é obrigatório")
     private String codigo;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "avaliador")
+    private List<Revisao> revisoes;
+
+    @ManyToMany
+    @JoinTable(joinColumns = {
+    @JoinColumn(name = "avaliador_id") }, inverseJoinColumns = { @JoinColumn(name = "area_id") })
+    @NotEmpty(message = "O campo deve possuir pelo menos um selecionado")
     private List<Area> areas;
 
     public Long getId() {

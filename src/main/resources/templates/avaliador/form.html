@@ -22,13 +22,14 @@
         <ul class="left hide-on-med-and-down">
             <li><a href="/index.html">Início</a></li>
             <li class="active"><a href="/avaliadores/">Avaliadores</a></li>
-            <li><a href="/membros.html">Trabalhos</a></li>
+            <li><a href="/trabalhos/">Trabalhos</a></li>
             <li><a href="/areas/">Áreas</a></li>
         </ul>
     </div>
 </nav>
 <div class="container">
-    <form th:action="@{salvar}" th:object="${avaliador}" method="POST">
+    <form th:action="@{/avaliadores/salvar}" th:object="${avaliador}" method="POST">
+        <input type="hidden" name="avaliadorId" th:field="*{id}"/>
         <div class="card" style="margin-top:5em;">
             <div class="card-content">
                 <span class="card-title">Manter Avaliador</span>
@@ -48,7 +49,7 @@
                               th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                     </div>
                     <div class="input-field col s4">
-                        <input id="codigo" name="codigo" type="text" class="validate"
+                        <input id="codigo" th:type="password" name="codigo" type="text" class="validate"
                                th:field="*{codigo}">
                         <label for="codigo">Código de Acesso</label>
                         <span class="helper-text" data-error="wrong" data-success="right"
@@ -57,11 +58,12 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s4">
-                        <select multiple name="areas">
-                            <option disabled>Selecione</option>
-                            <option th:each="area : ${areas}"
-                            th:value="${area.id}"
-                            th:text="${area.descricao}"></option>
+                        <select multiple name="area" th:field="*{areas}">
+                            <option th:value=null th:field="*{areas}">Selecione</option>
+                            <option th:each="opcao : ${opcoes}"
+                                    th:field="*{areas}"
+                                    th:value="${opcao.id}"
+                                    th:text="${opcao.descricao}"></option>
                         </select>
                         <label>Áreas de Atuação</label>
                         <span class="helper-text" data-error="wrong" data-success="right"
@@ -70,13 +72,12 @@
                 </div>
             </div>
             <div class="card-action">
-                <input type="hidden" name="id" value="${sede.id}">
                 <button type="submit" class="waves-effect waves-light btn green">Salvar</button>
-                <a href="/avaliadores" class="waves-effect waves-light btn grey">Cancelar</a>
+                <a th:href="@{/avaliadores/}" class="waves-effect waves-light btn grey">Cancelar</a>
             </div>
         </div>
+    </form>
 </div>
-</form>
 <script>
     $(document).ready(function() {
         $('select').formSelect();

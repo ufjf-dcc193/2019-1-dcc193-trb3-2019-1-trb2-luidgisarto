@@ -40,13 +40,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="avaliador: ${avaliadores}" th:object=${avaliador}>
-                    <td th:text=*{id}></td>
-                    <td th:text=*{nome}></td>
-                    <td th:text=*{email}></td>
+                <tr th:each="avaliador: ${avaliadores}" th:object="${avaliador}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{nome}"></td>
+                    <td th:text="*{email}"></td>
                     <td>
-                        <a href="/editar-sede/${sede.id}.html" class="btn-floating btn-small orange"><i class="material-icons left">edit</i></a>
-                        <a href="/excluir-sede/${sede.id}.html" class="btn-floating btn-small red"><i class="material-icons left">delete</i></a>
+                        <a th:href="@{./editar/{id}(id=*{id})}" class="btn-floating btn-small orange"><i class="material-icons left">edit</i></a>
+                        <a th:href="@{./excluir/{id}(id=*{id})}" class="btn-floating btn-small red"><i class="material-icons left">delete</i></a>
                     </td>
                 </tr>
 
