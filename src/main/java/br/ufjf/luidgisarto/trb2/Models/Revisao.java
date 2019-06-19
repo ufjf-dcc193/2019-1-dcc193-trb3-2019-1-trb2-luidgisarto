@@ -1,19 +1,30 @@
 package br.ufjf.luidgisarto.trb2.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
+import br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao;
 
 @Entity
 public class Revisao {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "revisao_id")
     private Long id;
+
+    @Min(value = 0, message = "o valor mínimo permitido é 0")
+    @Max(value = 100, message = "o valor máximo permitido é de 100")
     private Integer nota;
     private String descricao;
-    private Integer status;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "trabalho_id")
+    @ManyToOne
+    private Avaliador avaliador;
+    @ManyToOne
     private Trabalho trabalho;
+
+    @Enumerated
+    private SituacaoRevisao situacao;
 
     public Long getId() {
         return id;
@@ -31,14 +42,6 @@ public class Revisao {
         this.nota = nota;
     }
 
-    public Trabalho getTrabalho() {
-        return trabalho;
-    }
-
-    public void setTrabalho(Trabalho trabalho) {
-        this.trabalho = trabalho;
-    }
-
     public String getDescricao() {
         return descricao;
     }
@@ -47,11 +50,27 @@ public class Revisao {
         this.descricao = descricao;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Avaliador getAvaliador() {
+        return avaliador;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setAvaliador(Avaliador avaliador) {
+        this.avaliador = avaliador;
+    }
+
+    public Trabalho getTrabalho() {
+        return trabalho;
+    }
+
+    public void setTrabalho(Trabalho trabalho) {
+        this.trabalho = trabalho;
+    }
+
+    public SituacaoRevisao getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(SituacaoRevisao situacao) {
+        this.situacao = situacao;
     }
 }
