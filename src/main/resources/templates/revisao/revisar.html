@@ -28,7 +28,7 @@
     </div>
 </nav>
 <div class="container">
-    <form th:action="@{/trabalhos/revisar}" th:object="${revisao}" th:method="POST">
+    <form th:action="@{/revisoes/avaliar}" th:object="${revisao}" th:method="POST">
         <input type="hidden" name="trabalhoId" th:field="*{id}"/>
         <div class="card" style="margin-top:5em;">
             <div class="card-content">
@@ -54,7 +54,7 @@
                                     th:value="${opcao.id}"
                                     th:text="${opcao.descricao}"></option>
                         </select>
-                        <label>Avaliador</label>
+                        <label>Trabalho</label>
                         <span class="helper-text" data-error="wrong" data-success="right"
                               th:if="${#fields.hasErrors('trabalho')}" th:errors="*{trabalho}"></span>
                     </div>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="input-field col s4">
                         <input id="nota" name="nota" type="text" class="validate"
-                               th:field="*{descricao}">
+                               th:field="*{nota}">
                         <label for="nota">Nota</label>
                         <span class="helper-text" data-error="wrong" data-success="right"
                               th:if="${#fields.hasErrors('nota')}" th:errors="*{nota}"></span>
@@ -77,10 +77,10 @@
                 </div>
             </div>
             <div class="card-action">
-                <button th:field="*{situacao}" th:value="${T(br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao).Pendente}" type= "submit" class="aves-effect waves-light btn-small blue">Revisar Depois</button>
-                <button th:field="*{situacao}" th:value="${T(br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao).Avaliado}" type= "submit" class="aves-effect waves-light btn-small green">Revisar Agora</button>
-                <button th:field="*{situacao}" th:value="${T(br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao).Impedido}"type= "submit" class="aves-effect waves-light btn-small black">Pular</button>
-                <button th:href="@{/trabalhos/}" class="waves-effect waves-light btn-small grey">Cancelar</button>
+                <button name="situacao" th:field="*{situacao}" th:value="${T(br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao).Pendente}" type= "submit" class="aves-effect waves-light btn-small blue">Revisar Depois</button>
+                <button name="situacao" th:field="*{situacao}" th:value="${T(br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao).Avaliado}" type= "submit" class="aves-effect waves-light btn-small green">Revisar Agora</button>
+                <button name="situacao" th:field="*{situacao}" th:value="${T(br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao).Impedido}"type= "submit" class="aves-effect waves-light btn-small black">Pular</button>
+                <button th:href="@{/}" class="waves-effect waves-light btn-small grey">Cancelar</button>
             </div>
         </div>
 </div>

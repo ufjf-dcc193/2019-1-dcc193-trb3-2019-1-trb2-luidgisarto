@@ -1,11 +1,7 @@
 package br.ufjf.luidgisarto.trb2.controllers;
 
-import br.ufjf.luidgisarto.trb2.dtos.TrabalhoAreaDto;
-import br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao;
-import br.ufjf.luidgisarto.trb2.models.Area;
-import br.ufjf.luidgisarto.trb2.models.Trabalho;
-import br.ufjf.luidgisarto.trb2.repositories.AreaRepository;
-import br.ufjf.luidgisarto.trb2.repositories.TrabalhoRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import br.ufjf.luidgisarto.trb2.models.Area;
+import br.ufjf.luidgisarto.trb2.models.Trabalho;
+import br.ufjf.luidgisarto.trb2.repositories.AreaRepository;
+import br.ufjf.luidgisarto.trb2.repositories.TrabalhoRepository;
 
 @Controller
 @RequestMapping("areas")
@@ -43,8 +42,6 @@ public class AreaController {
 
         Area area = new Area();
 
-        List<Area> areas = areaRepository.findAll();
-
         mv.setViewName("form");
 
         mv.addObject("area", area);
@@ -58,8 +55,8 @@ public class AreaController {
 
         Area area = areaRepository.getOne(id);
 
-        List<TrabalhoAreaDto> trabalhosArea = trabalhoRepository
-                .obterTrabalhosPorArea(area, SituacaoRevisao.Avaliado.getId());
+        List<Trabalho> trabalhosArea = trabalhoRepository
+                .findAll();
 
         mv.setViewName("area/trabalho-area");
 

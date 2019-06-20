@@ -3,7 +3,6 @@ package br.ufjf.luidgisarto.trb2.models;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-
 import br.ufjf.luidgisarto.trb2.enums.SituacaoRevisao;
 
 @Entity
@@ -12,7 +11,7 @@ public class Revisao {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "revisao_id")
-    private Long id;
+    private Integer id;
 
     @Min(value = 0, message = "o valor mínimo permitido é 0")
     @Max(value = 100, message = "o valor máximo permitido é de 100")
@@ -21,6 +20,7 @@ public class Revisao {
 
     @ManyToOne
     private Avaliador avaliador;
+
     @ManyToOne
     private Trabalho trabalho;
 
@@ -30,13 +30,22 @@ public class Revisao {
     public Revisao() {
         avaliador = new Avaliador();
         trabalho = new Trabalho();
+        situacao = SituacaoRevisao.Pendente;
     }
 
-    public Long getId() {
+    public Revisao(Avaliador avaliador, SituacaoRevisao situacaoRevisao,
+    Integer nota, String descricao) {
+        this.descricao = descricao;
+        this.situacao = situacaoRevisao;
+        this.nota = nota;
+        this.avaliador = avaliador;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -78,5 +87,10 @@ public class Revisao {
 
     public void setSituacao(SituacaoRevisao situacao) {
         this.situacao = situacao;
+    }
+
+    @Override
+    public String toString() {
+        return this.descricao;
     }
 }

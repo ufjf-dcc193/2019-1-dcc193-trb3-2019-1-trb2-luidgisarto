@@ -1,15 +1,16 @@
 package br.ufjf.luidgisarto.trb2.dtos;
 
 public class TrabalhoAreaDto {
-    private Long totalAvaliados;
+    private long totalAvaliados;
     private String titulo;
     private String descricao;
     private String url;
 
-    public TrabalhoAreaDto(String titulo, String descricao, String url) {
+    public TrabalhoAreaDto(long totalAvaliados, String titulo, String descricao, String url) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.url = url;
+        this.totalAvaliados = totalAvaliados;
     }
 
     public long getTotalAvaliados() {

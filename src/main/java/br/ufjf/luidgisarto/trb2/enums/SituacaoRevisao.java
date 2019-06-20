@@ -1,7 +1,7 @@
 package br.ufjf.luidgisarto.trb2.enums;
 
 public enum SituacaoRevisao {
-    Pendente(0, "À Fazer"),
+    Pendente(0, "Pendente"),
     Avaliado(1, "Avaliado"),
     Impedido(2, "Impedido"),
     Valido(3, "Validado"),

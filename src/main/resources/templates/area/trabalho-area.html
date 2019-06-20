@@ -35,6 +35,7 @@
                     <th>Descrição</th>
                     <th>Url</th>
                     <th>Total de Avaliações</th>
+                    <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,7 +44,10 @@
                     <td th:text="*{titulo}"></td>
                     <td th:text="*{descricao}"></td>
                     <td th:text="*{url}"></td>
-                    <td th:text="*{totalAvaliados}"></td>
+                    <td th:text="*{totalRevisoes}"></td>
+                    <td>
+                        <a th:href="@{/revisoes/revisar/{id}(id=*{id})}" class="btn-small light-green">Avaliar</a>
+                    </td>
                 </tr>
 
                 </tbody>

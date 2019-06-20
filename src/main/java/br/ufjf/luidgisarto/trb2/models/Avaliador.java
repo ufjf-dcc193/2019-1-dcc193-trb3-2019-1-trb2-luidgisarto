@@ -3,6 +3,8 @@ package br.ufjf.luidgisarto.trb2.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,14 +13,11 @@ public class Avaliador {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "avaliador_id")
-    private Long id;
-    @NotBlank(message = "O campo é obrigatório")
+    private Integer id;
     private String nome;
 
-    @NotBlank(message = "O campo é obrigatório")
     private String email;
 
-    @NotBlank(message = "O campo é obrigatório")
     private String codigo;
 
     @OneToMany(mappedBy = "avaliador")
@@ -29,12 +28,22 @@ public class Avaliador {
     @JoinColumn(name = "avaliador_id") }, inverseJoinColumns = { @JoinColumn(name = "area_id") })
     @NotEmpty(message = "O campo deve possuir pelo menos um selecionado")
     private List<Area> areas;
+    
+    public Avaliador() {
+        
+    }
 
-    public Long getId() {
+    public Avaliador(String nome, Area area) {
+        this.areas = new ArrayList<>();
+        this.nome = nome;
+        this.areas.add(area);
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -68,5 +77,10 @@ public class Avaliador {
 
     public void setAreas(List<Area> areas) {
         this.areas = areas;
+    }
+
+    @Override
+    public String toString() {
+        return this.nome;
     }
 }

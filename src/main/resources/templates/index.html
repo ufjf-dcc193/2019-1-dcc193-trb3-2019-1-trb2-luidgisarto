@@ -26,7 +26,7 @@
 
         </div>
         <div class="col s10">
-            <h3 class="text-center">Revisões</h3>
+            <h3 class="text-center">Revisões por Avaliador</h3>
         </div>
     </div>
     <div class="row">
@@ -43,7 +43,18 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                    <tr th:each="revisao: ${revisoes}" th:object="${revisao}">
+                        <td th:text="*{id}"></td>
+                        <td th:text="*{avaliador}"></td>
+                        <td th:text="*{trabalho}"></td>
+                        <td th:text="*{nota}"></td>
+                        <td th:text="*{descricao}"></td>
+                        <td th:text="*{situacao}"></td>
+                        <td>
+                            <a th:href="@{./editar/{id}(id=*{id})}" class="btn-floating btn-small orange"><i class="material-icons left">edit</i></a>
+                            <a th:href="@{./excluir/{id}(id=*{id})}" class="btn-floating btn-small red"><i class="material-icons left">delete</i></a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

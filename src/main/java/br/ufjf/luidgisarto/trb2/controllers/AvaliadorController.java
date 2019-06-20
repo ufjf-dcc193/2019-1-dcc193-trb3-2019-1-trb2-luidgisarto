@@ -2,7 +2,6 @@ package br.ufjf.luidgisarto.trb2.controllers;
 
 import br.ufjf.luidgisarto.trb2.models.Area;
 import br.ufjf.luidgisarto.trb2.models.Avaliador;
-import br.ufjf.luidgisarto.trb2.models.Trabalho;
 import br.ufjf.luidgisarto.trb2.repositories.AreaRepository;
 import br.ufjf.luidgisarto.trb2.repositories.AvaliadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

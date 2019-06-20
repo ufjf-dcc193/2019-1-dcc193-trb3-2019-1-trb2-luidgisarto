@@ -3,6 +3,8 @@ package br.ufjf.luidgisarto.trb2.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,33 +13,39 @@ public class Trabalho {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "trabalho_id")
-    private Long id;
+    private Integer id;
 
-    @NotBlank(message = "O campo é obrigatório")
     private String titulo;
 
-    @NotBlank(message = "O campo é obrigatório")
     private String descricao;
 
-    @NotBlank(message = "O campo é obrigatório")
     private String url;
 
     @ManyToOne
-    @NotNull(message = "O campo é obrigatório")
     private Area area;
 
     @OneToMany(mappedBy = "trabalho")
     private List<Revisao> revisoes;
 
     public Trabalho() {
-
+        revisoes = new ArrayList<>();
     }
 
-    public Long getId() {
+    public Trabalho(String titulo, String descricao, Area a) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.area = a;
+    }
+
+    public Integer getTotalRevisoes() {
+        return revisoes.size();
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -79,5 +87,10 @@ public class Trabalho {
 
     public void setRevisoes(List<Revisao> revisoes) {
         this.revisoes = revisoes;
+    }
+
+    @Override
+    public String toString() {
+        return this.titulo;
     }
 }
